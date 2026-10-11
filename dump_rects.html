@@ -1,0 +1,11 @@
+<!DOCTYPE html><html><body><script>
+fetch('http://localhost:3000/?view=clean').then(r=>r.text()).then(html=>{
+  document.body.innerHTML = html;
+  // wait and measure
+  setTimeout(()=>{
+    const el = document.querySelector('.ticket-card-body');
+    const r = el ? el.getBoundingClientRect() : {};
+    document.title = JSON.stringify(r);
+  }, 100);
+});
+</script></body></html>

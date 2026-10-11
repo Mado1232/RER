@@ -1,0 +1,113 @@
+import subprocess, os
+from PIL import Image
+
+test_html = """<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #f2f4f7;
+    font-family: 'Roboto', -apple-system, sans-serif;
+  }
+  .card-container {
+    width: 432px;
+    background: #ffffff;
+    border-radius: 26px 26px 0 0;
+    margin: 20px auto 0;
+    overflow: hidden;
+  }
+  .ticket-lower-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 20px 24px;
+    position: relative;
+  }
+  .ticket-qr-card {
+    background: #ffffff;
+    border-radius: 28px;
+    padding: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f3f4f6;
+    display: inline-block;
+    line-height: 0;
+  }
+  .qr-image-asset {
+    display: block;
+    width: 227px;
+    height: 227px;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+  .ticket-id-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 24px;
+    margin-bottom: 6px;
+    font-size: 15px;
+    line-height: 1.2;
+  }
+  .ticket-id-label {
+    color: #6b7280;
+    font-size: 14.5px;
+    font-weight: 400;
+  }
+  .ticket-id-value {
+    color: #111827;
+    font-size: 15.5px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+</style>
+</head>
+<body>
+  <div class="card-container">
+    <div class="ticket-lower-section">
+      <div class="ticket-qr-card">
+        <img src="qr_code_clean_v4.png" class="qr-image-asset">
+      </div>
+      <div class="ticket-id-line">
+        <span class="ticket-id-label">Номер:</span>
+        <span class="ticket-id-value">766 713</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+"""
+
+with open('test_exact_lower.html', 'w', encoding='utf-8') as f:
+    f.write(test_html)
+
+edge_path = r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+out_path = os.path.abspath('test_exact_lower.png')
+in_path = os.path.abspath('test_exact_lower.html')
+
+subprocess.run([
+    edge_path,
+    '--headless=new',
+    '--disable-gpu',
+    f'--screenshot={out_path}',
+    '--window-size=500,450',
+    in_path
+], check=True)
+
+# Crop the card
+t = Image.open('test_exact_lower.png')
+# find white card
+tc = t.crop((34, 20, 34 + 432, 20 + 360))
+
+orig = Image.open('card_orig_section.png')
+
+comp = Image.new('RGB', (432 * 2 + 20, max(tc.height, orig.height)), (242, 244, 247))
+comp.paste(orig, (0, 0))
+comp.paste(tc, (432 + 20, 0))
+comp.save('compare_exact_lower.png')
+print("Saved compare_exact_lower.png")

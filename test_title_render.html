@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    padding: 30px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    font-family: 'Roboto', -apple-system, sans-serif;
+  }
+  .title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.5px;
+  }
+  .digit-one {
+    display: inline-flex;
+    align-self: center;
+    margin-right: 7px;
+  }
+  .digit-one svg {
+    display: block;
+  }
+</style>
+</head>
+<body>
+  <!-- Test with height 32, 34, 36, 38 -->
+  <div class="title-row" style="font-size: 36px;">
+    <span class="digit-one">
+      <svg viewBox="0 0 27 46" width="22" height="37.5" fill="#111827">
+        <polygon points="13.0,0 18.8,0 18.8,39.5 26.6,39.5 26.6,44.5 2.4,44.5 2.4,39.5 11.6,39.5 11.6,11.0 3.0,16.5 0.5,14.0 0.5,11.5" />
+      </svg>
+    </span>
+    <span>квиток</span>
+  </div>
+
+  <div class="title-row" style="font-size: 38px;">
+    <span class="digit-one">
+      <svg viewBox="0 0 27 46" width="23" height="39" fill="#111827">
+        <polygon points="13.0,0 18.8,0 18.8,39.5 26.6,39.5 26.6,44.5 2.4,44.5 2.4,39.5 11.6,39.5 11.6,11.0 3.0,16.5 0.5,14.0 0.5,11.5" />
+      </svg>
+    </span>
+    <span>квиток</span>
+  </div>
+
+  <div class="title-row" style="font-size: 34px;">
+    <span class="digit-one">
+      <svg viewBox="0 0 27 46" width="20.5" height="35" fill="#111827">
+        <polygon points="13.0,0 18.8,0 18.8,39.5 26.6,39.5 26.6,44.5 2.4,44.5 2.4,39.5 11.6,39.5 11.6,11.0 3.0,16.5 0.5,14.0 0.5,11.5" />
+      </svg>
+    </span>
+    <span>квиток</span>
+  </div>
+</body>
+</html>

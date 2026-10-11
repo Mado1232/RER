@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pay.barabolia.ua</title>
+  <meta name="description" content="Інтерактивний веб-редактор демонстраційних макетів тролейбусного квитка.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Підключення бібліотек: локальні файли vendor з резервним завантаженням з CDN -->
+  <script src="vendor/react.production.min.js"></script>
+  <script>
+    if (typeof React === 'undefined') {
+      document.write('<script src="https://unpkg.com/react@18/umd/react.production.min.js"><\/script>');
+    }
+  </script>
+
+  <script src="vendor/react-dom.production.min.js"></script>
+  <script>
+    if (typeof ReactDOM === 'undefined') {
+      document.write('<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"><\/script>');
+    }
+  </script>
+
+  <script src="vendor/html-to-image.js"></script>
+  <script>
+    if (typeof htmlToImage === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.js"><\/script>');
+    }
+  </script>
+
+  <script src="vendor/html2canvas.min.js"></script>
+  <script>
+    if (typeof html2canvas === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"><\/script>');
+    }
+  </script>
+
+  <!-- Головний скрипт додатку -->
+  <script src="app.js"></script>
+</body>
+</html>

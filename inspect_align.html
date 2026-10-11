@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script src="vendor/react.production.min.js"></script>
+  <script src="vendor/react-dom.production.min.js"></script>
+  <script src="vendor/html-to-image.js"></script>
+  <script src="vendor/html2canvas.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Wait for react to mount
+    setTimeout(() => {
+      const dump = {};
+      const els = ['.app-container', '.clean-ticket-view-wrapper', '.ticket-export-wrapper', '.ticket-card-wrapper', '.ticket-card-body'];
+      els.forEach(s => {
+        const el = document.querySelector(s);
+        if (el) {
+          const r = el.getBoundingClientRect();
+          const cs = window.getComputedStyle(el);
+          dump[s] = {
+            rect: { left: r.left, right: r.right, width: r.width },
+            display: cs.display,
+            flexDirection: cs.flexDirection,
+            justifyContent: cs.justifyContent,
+            alignItems: cs.alignItems,
+            margin: cs.margin,
+            padding: cs.padding,
+            width: cs.width,
+            maxWidth: cs.maxWidth
+          };
+        }
+      });
+      const p = document.createElement('pre');
+      p.id = 'debug-output';
+      p.textContent = JSON.stringify(dump, null, 2);
+      document.body.appendChild(p);
+    }, 600);
+  </script>
+</body>
+</html>

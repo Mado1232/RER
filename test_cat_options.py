@@ -1,0 +1,127 @@
+import subprocess, os
+
+# Create HTML to test different cat vector outlines on the gradient
+html = '''<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background: #f2f4f7;
+  padding: 40px;
+  display: flex;
+  gap: 30px;
+  font-family: sans-serif;
+  align-items: center;
+}
+.badge {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #FF3366 0%, #7928CA 100%);
+  border: 3.5px solid #FFFFFF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+</style>
+</head>
+<body>
+
+  <!-- Option 1: Cat holding scanner frame in pure white outline (no black background) -->
+  <div class="item">
+    <div>Cat with scanner outline</div>
+    <div class="badge">
+      <svg viewBox="0 0 40 40" width="36" height="36" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Ears -->
+        <path d="M 12 14 L 15 5 L 20 12" />
+        <path d="M 23 12 L 28 6 L 29 14" />
+        <path d="M 20 12 L 23 12" />
+        <!-- Scanner frame -->
+        <rect x="9" y="12" width="22" height="22" rx="4.5" />
+        <!-- Paws clutching frame -->
+        <path d="M 7.5 19 C 6 20 6 23 8 24.5 C 9.5 25.5 11 25 11.5 23" />
+        <path d="M 29 31 C 30.5 32.5 33 32 33.5 30.5 C 34 29 32.5 27.5 31 27" />
+        <!-- Inner QR details (stroke only) -->
+        <rect x="13" y="16" width="4.5" height="4.5" rx="1" stroke-width="1.6" />
+        <rect x="22.5" y="16" width="4.5" height="4.5" rx="1" stroke-width="1.6" />
+        <rect x="13" y="24" width="4.5" height="4.5" rx="1" stroke-width="1.6" />
+        <path d="M 23 25 L 26.5 28.5 M 26.5 25 L 23 28.5" stroke-width="1.6" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Option 2: Classic monobank cat face (ears, cheeks, eyes, nose, whiskers) -->
+  <div class="item">
+    <div>Classic Cat Face</div>
+    <div class="badge">
+      <svg viewBox="0 0 40 40" width="34" height="34" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Head & Ears outline -->
+        <path d="M 8 16 L 11 6 C 11.5 5 13 5 13.5 6 L 18 12 C 19 11.5 21 11.5 22 12 L 26.5 6 C 27 5 28.5 5 29 6 L 32 16 C 34 21 33 28 28 31 C 24 33 16 33 12 31 C 7 28 6 21 8 16 Z" />
+        <!-- Inner ears -->
+        <path d="M 12 8 L 14 13" stroke-width="1.5" />
+        <path d="M 28 8 L 26 13" stroke-width="1.5" />
+        <!-- Eyes -->
+        <ellipse cx="14" cy="20" rx="1.5" ry="2" fill="#ffffff" stroke="none" />
+        <ellipse cx="26" cy="20" rx="1.5" ry="2" fill="#ffffff" stroke="none" />
+        <!-- Nose & Mouth -->
+        <path d="M 19 23 L 21 23 L 20 24.5 Z" fill="#ffffff" stroke="none" />
+        <path d="M 18 26 C 19 27 20 27 20 26 C 20 27 21 27 22 26" stroke-width="1.5" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- Option 3: Monobank QR Cat silhouette (ears and QR scanner) -->
+  <div class="item">
+    <div>Monobank QR Cat Clean</div>
+    <div class="badge">
+      <svg viewBox="0 0 44 44" width="36" height="36" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Cat ears peaking over card -->
+        <path d="M 13 14 L 16.5 4 C 17 3 18.5 3 19 4.2 L 22.5 12" />
+        <path d="M 23 12 L 27.5 5.5 C 28 4.5 29.5 4.8 30 6 L 31.5 14" />
+        <!-- Card outline -->
+        <rect x="9.5" y="13" width="25" height="25" rx="5" />
+        <!-- Scanner marks -->
+        <path d="M 14 17 L 12.5 17 A 1 1 0 0 0 11.5 18 L 11.5 19.5" stroke-width="1.4" />
+        <path d="M 30 17 L 31.5 17 A 1 1 0 0 1 32.5 18 L 32.5 19.5" stroke-width="1.4" />
+        <path d="M 11.5 31.5 L 11.5 33 A 1 1 0 0 0 12.5 34 L 14 34" stroke-width="1.4" />
+        <path d="M 32.5 31.5 L 32.5 33 A 1 1 0 0 1 31.5 34 L 30 34" stroke-width="1.4" />
+        <!-- QR modules -->
+        <rect x="14" y="18" width="5.5" height="5.5" rx="1.2" stroke-width="1.6" />
+        <rect x="24.5" y="18" width="5.5" height="5.5" rx="1.2" stroke-width="1.6" />
+        <rect x="14" y="26" width="5.5" height="5.5" rx="1.2" stroke-width="1.6" />
+        <circle cx="26" cy="27.5" r="1.3" stroke-width="1.2" />
+        <line x1="28.5" y1="26.5" x2="25.5" y2="31" stroke-width="1.4" />
+        <circle cx="28.5" cy="30.5" r="1.3" stroke-width="1.2" />
+        <!-- Paws -->
+        <path d="M 8 20 C 7 21 7 23.5 8.5 24.5 C 9.5 25.2 10.5 24.8 11.2 23.5" />
+        <path d="M 32.5 31 C 33.5 32.5 35.5 32 36 30.5 C 36.5 29 35 28 33.5 27.5" />
+      </svg>
+    </div>
+  </div>
+
+</body>
+</html>
+'''
+
+with open('test_cat_options.html', 'w', encoding='utf-8') as f:
+    f.write(html)
+
+edge_path = r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+out_path = r'C:\Users\Admin\.gemini\antigravity\scratch\trolleybus-ticket-editor\test_cat_options.png'
+
+subprocess.run([
+    edge_path,
+    '--headless',
+    '--disable-gpu',
+    f'--screenshot={out_path}',
+    '--window-size=650,250',
+    os.path.abspath('test_cat_options.html')
+])
+print('Rendered test_cat_options.png')

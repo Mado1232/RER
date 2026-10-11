@@ -1,0 +1,27 @@
+<!DOCTYPE html><html><head><link rel="stylesheet" href="styles.css"></head><body><div id="root"></div><script src="vendor/react.production.min.js"></script><script src="vendor/react-dom.production.min.js"></script><script src="vendor/html-to-image.js"></script><script src="vendor/html2canvas.min.js"></script><script src="app.js"></script><script>
+setTimeout(() => {
+  
+const el = document.querySelector('.ticket-card-wrapper');
+let cur = el;
+const chain = [];
+while (cur && cur !== document.documentElement) {
+  const r = cur.getBoundingClientRect();
+  const cs = window.getComputedStyle(cur);
+  chain.push({
+    tag: cur.tagName,
+    cls: cur.className,
+    r_left: r.left,
+    r_right: r.right,
+    r_width: r.width,
+    pad: cs.padding,
+    mar: cs.margin,
+    display: cs.display,
+    justify: cs.justifyContent,
+    alignItems: cs.alignItems
+  });
+  cur = cur.parentElement;
+}
+document.title = JSON.stringify(chain);
+
+}, 300);
+</script></body></html>

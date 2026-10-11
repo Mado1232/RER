@@ -1,0 +1,1354 @@
+/* =====================================================================
+   Стилі для веб-додатку «Редактор макета квитка тролейбуса» (v2.1)
+   Чиста світла тема, природна адаптивна верстка без штучних рамок
+   ===================================================================== */
+
+:root {
+  color-scheme: light;
+  --bg-page: #f2f4f7;
+  --bg-card: #ffffff;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --text-subtle: #9ca3af;
+  --primary: #0284c7;
+  --primary-hover: #0369a1;
+  --secondary: #475569;
+  --border-light: #e5e7eb;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.03);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Контейнер додатку --- */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 48px;
+}
+
+/* --- Верхня шапка додатку --- */
+.app-top-header {
+  background: var(--bg-card);
+  border-radius: 18px;
+  padding: 16px 24px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+  margin-bottom: 24px;
+}
+
+.app-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-icon {
+  font-size: 28px;
+  background: #e0f2fe;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.app-heading {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.3px;
+}
+
+.app-subheading {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Перемикач режимів: Редактор / Повний вигляд */
+.mode-switch-group {
+  display: inline-flex;
+  background: #e5e7eb;
+  padding: 3px;
+  border-radius: 12px;
+}
+
+.mode-btn {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mode-btn.active {
+  background: #ffffff;
+  color: var(--text-main);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.badge-demo-status {
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  border: 1px solid #fde68a;
+}
+
+/* --- Головна сітка (Режим редактора) --- */
+.app-main-layout {
+  display: grid;
+  grid-template-columns: minmax(360px, 450px) 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+/* --- Панель налаштувань --- */
+.control-panel-card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  padding: 24px 22px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-light);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.panel-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #e0f2fe;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.panel-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.lang-toggle-btn {
+  background: #f3f4f6;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-toggle-btn:hover {
+  background: #e5e7eb;
+  color: var(--text-main);
+}
+
+/* --- Форма налаштувань --- */
+.panel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.label-number {
+  background: #0284c7;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-badge {
+  position: absolute;
+  left: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--primary);
+  pointer-events: none;
+}
+
+.form-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border-light);
+  background: #f9fafb;
+  font-size: 14.5px;
+  font-family: inherit;
+  color: var(--text-main);
+  transition: all 0.2s;
+}
+
+.input-with-icon .form-input {
+  padding-left: 36px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
+}
+
+.date-input, .time-input {
+  cursor: pointer;
+}
+
+/* Пресети */
+.quick-presets {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.presets-label {
+  font-size: 11.5px;
+  color: var(--text-subtle);
+  margin-right: 2px;
+}
+
+.preset-chip {
+  background: #f3f4f6;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.preset-chip:hover {
+  background: #e5e7eb;
+  color: var(--text-main);
+}
+
+.preset-chip.active {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-color: #bae6fd;
+  font-weight: 600;
+}
+
+/* Керування живим таймером */
+.timer-control-box {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timer-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.timer-box-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #166534;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timer-box-value {
+  font-size: 16px;
+  font-weight: 800;
+  color: #15803d;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-btn-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.timer-btn {
+  background: #ffffff;
+  border: 1px solid #86efac;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #166534;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.timer-btn:hover {
+  background: #dcfce7;
+}
+
+.timer-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.timer-input-group {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  padding: 3px 8px;
+  gap: 2px;
+}
+
+.timer-num-input {
+  width: 40px;
+  border: none;
+  background: transparent;
+  font-size: 14.5px;
+  font-weight: 700;
+  text-align: center;
+  color: #15803d;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+}
+
+.timer-input-sep {
+  font-weight: 700;
+  color: #166534;
+  font-size: 15px;
+}
+
+.timer-input-label {
+  font-size: 11px;
+  color: #15803d;
+  font-weight: 600;
+}
+
+/* Додаткові налаштування */
+.advanced-accordion {
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f9fafb;
+}
+
+.accordion-toggle-btn {
+  width: 100%;
+  padding: 12px 14px;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--secondary);
+  cursor: pointer;
+}
+
+.accordion-arrow {
+  font-size: 10px;
+  transition: transform 0.2s;
+}
+
+.accordion-arrow.open {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  padding: 12px 14px 16px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #ffffff;
+}
+
+.form-group-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label-sub {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.sub-input-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* Керування кольором цитати */
+.color-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.color-input-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.color-input-bubble {
+  width: 30px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  background: none;
+}
+
+.color-hex-badge {
+  font-family: monospace;
+  font-size: 11px;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.color-theme-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.color-theme-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.color-theme-chip:hover {
+  transform: translateY(-1px);
+}
+
+.color-theme-chip.active {
+  box-shadow: 0 0 0 2px #4f46e5;
+}
+
+/* Кнопки дій */
+.action-buttons-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-top: 6px;
+}
+
+.btn {
+  width: 100%;
+  height: 44px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: var(--secondary);
+  border: 1px solid var(--border-light);
+}
+
+.btn-secondary:hover {
+  background: #e5e7eb;
+  color: var(--text-main);
+}
+
+.btn-primary {
+  background: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-jpg {
+  background: #0f766e;
+  box-shadow: 0 4px 12px rgba(15, 118, 110, 0.2);
+}
+
+.btn-jpg:hover {
+  background: #115e59;
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.demo-notice-box {
+  background: #f9fafb;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  padding: 9px 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.notice-icon {
+  font-size: 14px;
+}
+
+.notice-text {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* =====================================================================
+   Секція попереднього перегляду (Preview)
+   ===================================================================== */
+.preview-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preview-card-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preview-badge-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  margin-bottom: 20px;
+}
+
+.preview-live-indicator {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.preview-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Оболонка квитка для експорту */
+.ticket-export-wrapper {
+  background: #f2f4f7;
+  padding: 34px 16px 24px;
+  border-radius: 28px;
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* =====================================================================
+   Сам квиток (TicketCard) - нативна адаптивна карточка
+   ===================================================================== */
+.ticket-card-wrapper {
+  position: relative;
+  width: calc(100% - 20px);
+  max-width: 410px;
+  margin: 0 auto;
+  padding-top: 44px;
+  user-select: none;
+}
+
+/* Позначка ЗРАЗОК / DEMO */
+.demo-corner-badge {
+  position: absolute;
+  top: 14px;
+  left: 10px;
+  z-index: 30;
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+}
+
+.demo-badge-dot {
+  width: 5px;
+  height: 5px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+/* Кнопка інформації «ⓘ» у верхньому кутку */
+.ticket-top-info-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid #9ca3af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-family: serif;
+  font-size: 13px;
+  font-weight: 600;
+  font-style: italic;
+  background: transparent;
+  cursor: pointer;
+  z-index: 20;
+  padding: 0;
+  line-height: 1;
+}
+
+.ticket-top-info-btn:hover {
+  border-color: #6b7280;
+  color: #4b5563;
+}
+
+/* Верхній круглий значок (фірмовий маскот-кіт monobank у рамці стікера) */
+.ticket-top-emblem-container {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.ticket-top-emblem {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #9a55d1 0%, #e02874 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(123, 44, 191, 0.28);
+  border: 3.5px solid #ffffff;
+}
+
+.ticket-sticker-img {
+  width: 26px;
+  height: 30px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ІДЕАЛЬНО БІЛЕ ТІЛО КВИТКА */
+.ticket-card-body {
+  background: #ffffff;
+  border-radius: 26px 26px 0 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 24px 0 0 0;
+  position: relative;
+}
+
+/* Верхня полукругла виїмка карточки під бейдж */
+.ticket-notch-cutout-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 106px;
+  height: 28px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.ticket-notch-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Верхня біжуча стрічка з цитатою (колір налаштовується динамічно) */
+.ticket-ticker-strip {
+  background: #f7e9f6;
+  color: #8c5995;
+  padding: 7px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 10px;
+  margin-bottom: 14px;
+  position: relative;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee-smooth 24s linear infinite;
+}
+
+@keyframes marquee-smooth {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  padding: 0 16px;
+}
+
+/* Заголовок «Тролейбус» */
+.ticket-header {
+  text-align: center;
+  padding: 0 16px;
+}
+
+.ticket-title {
+  font-size: 19px;
+  font-weight: 500;
+  color: #111827;
+  letter-spacing: -0.1px;
+}
+
+/* Тонка лінія-розділювач під «Тролейбус» */
+.ticket-hairline {
+  width: 124px;
+  height: 1px;
+  background: #e5e7eb;
+  margin: 8px auto 0;
+}
+
+/* Рядок «Придбано 3 вересня о 14:09» - ненав'язливий сірий, звичайне начертання */
+.ticket-purchase-time {
+  text-align: center;
+  color: #6b7280;
+  font-size: 14.5px;
+  font-weight: 400;
+  margin-top: 14px;
+}
+
+/* «1 квиток» - виразний заголовок із точною цифрою 1 за референсом */
+.ticket-quantity {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-top: 6px;
+  line-height: 1;
+  color: #111827;
+}
+
+.digit-one-svg-wrapper {
+  display: inline-flex;
+  align-items: flex-end;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+
+.digit-one-svg {
+  width: 17px;
+  height: 31px;
+  fill: #111827;
+  display: block;
+}
+
+.ticket-quantity-word {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+  font-size: 35px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  transform: translateY(2px);
+  color: #111827;
+}
+
+/* Плашка «Квиток дійсний — 59:56» (трохи збільшена за референсом) */
+.ticket-validity-pill-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.ticket-validity-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: linear-gradient(90deg, #d7f5e4 0%, #d8edfb 100%);
+  padding: 8.5px 28px;
+  border-radius: 9999px;
+}
+
+.validity-indicator-circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1.6px solid #34d399;
+  background: transparent;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.validity-text {
+  font-size: 16.5px;
+  font-weight: 500;
+  color: #1f2937;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.1px;
+}
+
+/* «Тролейбус № 334» - збільшений відступ, правильний знак № та пропорційні цифри */
+.ticket-transport-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.transport-label {
+  font-size: 17px;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.transport-number {
+  font-size: 26px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.number-sign-glyph {
+  font-weight: 700;
+  margin-right: 2px;
+}
+
+/* Перфорована лінія з круглими виїмками на гранях */
+.ticket-perforation-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 22px;
+  margin-bottom: 14px;
+}
+
+.ticket-notch {
+  width: 21px;
+  height: 21px;
+  background: #f2f4f7;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
+.notch-left {
+  left: -10.5px;
+}
+
+.notch-right {
+  right: -10.5px;
+}
+
+.ticket-perforation-dashed {
+  flex: 1;
+  margin: 0 16px;
+  height: 2px;
+  display: flex;
+  align-items: center;
+}
+
+/* Блок QR-коду */
+.ticket-lower-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 4px 16px 105px;
+}
+
+.ticket-demo-subtle-watermark {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  font-size: 26px;
+  font-weight: 900;
+  color: rgba(156, 163, 175, 0.12);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: 2px;
+  z-index: 1;
+}
+
+.ticket-qr-card {
+  background: #ffffff;
+  border-radius: 26px;
+  padding: 13px;
+  box-shadow: 0 4px 22px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f3f4f6;
+  display: inline-block;
+  position: relative;
+  z-index: 2;
+  line-height: 0;
+}
+
+.qr-image-asset {
+  display: block;
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/* Номер квитка */
+.ticket-id-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 26px;
+  margin-bottom: 4px;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.ticket-id-label {
+  color: #6b7280;
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: -0.1px;
+}
+
+.ticket-id-value {
+  color: #111827;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Хвилястий плавний низ квитка за референсом monobank */
+.ticket-scalloped-bottom {
+  position: absolute;
+  bottom: -23px;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  line-height: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.scallop-svg {
+  display: block;
+  width: 100%;
+  height: 24px;
+}
+
+/* Підпис під квитком */
+.ticket-reopen-note {
+  text-align: center;
+  font-size: 13.5px;
+  color: #9ca3af;
+  margin-top: 50px;
+  margin-bottom: 60px;
+  line-height: 1.4;
+  padding: 0 20px;
+}
+
+.ticket-external-footer {
+  text-align: center;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: 16px;
+  line-height: 1.4;
+  padding: 0 20px;
+}
+
+/* =====================================================================
+   Повноекранний вигляд квитка (Full Ticket View - БЕЗ ФЕЙКОВОГО КОРПУСУ)
+   ===================================================================== */
+.app-container.mode-clean-view {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.clean-ticket-view-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  padding: 20px 12px 64px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.clean-ticket-view-wrapper .ticket-lower-section {
+  padding-bottom: 155px;
+}
+
+.clean-ticket-view-wrapper .ticket-export-wrapper {
+  background: transparent;
+  padding: 0;
+  width: 100%;
+  max-width: 370px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.clean-ticket-view-wrapper .ticket-card-wrapper {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Приховування будь-яких водяних знаків та службових кнопок у чистому вигляді квитка */
+.clean-ticket-view-wrapper .demo-corner-badge,
+.clean-ticket-view-wrapper .ticket-demo-subtle-watermark,
+.clean-ticket-view-wrapper .floating-settings-fab {
+  display: none !important;
+}
+
+/* Напівпрозора плаваюча кнопка «⚙️ Налаштування» у кутку */
+.floating-settings-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 13.5px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  z-index: 1000;
+  transition: all 0.2s ease;
+}
+
+.floating-settings-fab:hover {
+  background: rgba(15, 23, 42, 0.92);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Модальне вікно налаштувань */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-content-box {
+  background: #ffffff;
+  border-radius: 24px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: #f3f4f6;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  background: #e5e7eb;
+}
+
+/* Toast сповіщення */
+.app-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: #ffffff;
+  padding: 11px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  z-index: 9999;
+  animation: slide-up 0.25s ease-out;
+}
+
+.toast-icon {
+  background: #22c55e;
+  color: #ffffff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@keyframes slide-up {
+  from { transform: translate(-50%, 20px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* Адаптивність для смартфонів (viewport < 640px) */
+@media (max-width: 640px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .app-container {
+    padding: 8px 6px 36px;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .app-top-header {
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border-radius: 14px;
+  }
+
+  .app-main-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .preview-section {
+    order: -1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .preview-card-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ticket-export-wrapper {
+    padding: 20px 0 16px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    background: transparent;
+  }
+
+  .ticket-card-wrapper {
+    width: calc(100% - 16px);
+    max-width: 410px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .clean-ticket-view-wrapper .ticket-card-wrapper {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .clean-ticket-view-wrapper {
+    padding: 10px 10px 36px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
