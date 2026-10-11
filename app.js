@@ -723,9 +723,9 @@
 
     const ticketWrapperRef = useRef(null);
 
-    // Встановлення автентичної назви сторінки pay.barabolia.ua
+    // Встановлення назви сторінки pay.monobank.test
     useEffect(() => {
-      document.title = 'pay.barabolia.ua';
+      document.title = 'pay.monobank.test';
     }, []);
 
     const switchViewMode = (newMode) => {

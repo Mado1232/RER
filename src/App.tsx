@@ -53,7 +53,7 @@ export const App: React.FC = () => {
   const ticketCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.title = 'pay.barabolia.ua';
+    document.title = 'pay.monobank.test';
   }, []);
 
   // Живий автономний таймер відліку
